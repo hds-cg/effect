@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Effect Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="javascript.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div id="controls">
+            <!-- 文件上传控件组 -->
+            <div class="control-group01">
+                <label class="custom-upload">
+                    <input type="file" id="uploadImage" accept="image/*" hidden>
+                    <span class="upload-text" id="uploadStatus">上传图片</span>
+                    <div class="upload-icon"></div>
+                </label>
+                <!-- <small class="upload-hint">支持 jpg、png 格式</small> -->
+            </div>
+
+            <!-- 参数控制区 -->
+            <div class="control-group">
+                <div class="control-label">
+                    <label for="lengthSlider">曲线长度</label>
+                    <span class="value-display" id="lengthValue">100</span>
+                </div>
+                <input type="range" 
+                       class="custom-slider" 
+                       id="lengthSlider" 
+                       min="0" 
+                       max="200" 
+                       value="100"
+                       aria-labelledby="lengthValue"
+                       title="调整曲线长度">
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">
+                    <label for="curveSlider">曲率强度</label>
+                    <span class="value-display" id="curveValue">2.0</span>
+                </div>
+                <input type="range" 
+                       class="custom-slider" 
+                       id="curveSlider" 
+                       min="0.0" 
+                       max="3" 
+                       step="0.1" 
+                       value="2"
+                       aria-labelledby="curveValue"
+                       title="调整曲率强度">
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">
+                    <label for="noiseSlider">动态噪声</label>
+                    <span class="value-display" id="noiseValue">1.0</span>
+                </div>
+                <input type="range" 
+                       class="custom-slider" 
+                       id="noiseSlider" 
+                       min="0.0" 
+                       max="5" 
+                       step="0.1" 
+                       value="1"
+                       aria-labelledby="noiseValue"
+                       title="调整动态噪声">
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">
+                    <label for="zSlider">Z轴深度</label>
+                    <span class="value-display" id="zValue">1.0</span>
+                </div>
+                <input type="range" 
+                       class="custom-slider" 
+                       id="zSlider" 
+                       min="0" 
+                       max="5" 
+                       step="0.1" 
+                       value="1"
+                       aria-labelledby="zValue"
+                       title="调整Z轴深度">
+            </div>
+        </div>
+        <div id="canvas-container"></div>
+    </div>
+</body>
+</html>

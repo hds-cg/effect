@@ -1,0 +1,191 @@
+/* 基础重置 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 添加容器样式 */
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 修改控制面板样式 */
+#controls {
+    position: relative;
+    left: 0;
+    top: 0;
+    /* 基础背景色，作为降级方案 */
+    background: rgb(255, 255, 255);
+    /* 半透明背景作为第一级降级方案 */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    margin: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    /* 添加浏览器前缀 */
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 15vw;
+    height: 40vh;
+    overflow-y: auto;
+}
+
+/* 为不支持 backdrop-filter 的浏览器提供替代样式 */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+    #controls {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* 滑动条现代风格 */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    margin: 15px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #6A6A6A;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+    background: #4A4A4A;
+}
+
+/* 标签排版优化 */
+.control-group {
+    margin-bottom: 1rem;
+}
+.control-group01 {
+    margin: 0.5rem 0 2rem 0;
+    position: space-between;
+    width: 100%; /* 确保控件组占满父元素宽度 */
+}
+
+.control-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 0.5px;
+}
+
+.value-display {
+    color: #888;
+    font-feature-settings: "tnum";
+}
+
+/* 交互增强 */
+button {
+    background: #6A6A6A;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #4A4A4A;
+    transform: translateY(-1px);
+}
+
+/* 三维画布效果 */
+canvas {
+    filter: contrast(1.05) saturate(1.1);
+}
+
+/* 添加画布容器样式 */
+#canvas-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 修改上传按钮容器样式 */
+.custom-upload {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(106, 106, 106, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    width: 100%;
+    min-height: 36px;
+}
+
+.custom-upload:hover {
+    background: rgba(106, 106, 106, 0.15);
+}
+
+/* 上传文字样式 */
+.upload-text {
+    font-size: 14px;
+    color: #444;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* 上传图标样式 */
+.upload-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236A6A6A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+    display: block; /* 确保图标显示 */
+}
+
+/* 加载状态的图标 */
+.loading .upload-icon {
+    animation: spin 1s linear infinite;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236A6A6A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='2' x2='12' y2='6'%3E%3C/line%3E%3Cline x1='12' y1='18' x2='12' y2='22'%3E%3C/line%3E%3Cline x1='4.93' y1='4.93' x2='7.76' y2='7.76'%3E%3C/line%3E%3Cline x1='16.24' y1='16.24' x2='19.07' y2='19.07'%3E%3C/line%3E%3Cline x1='2' y1='12' x2='6' y2='12'%3E%3C/line%3E%3Cline x1='18' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cline x1='4.93' y1='19.07' x2='7.76' y2='16.24'%3E%3C/line%3E%3Cline x1='16.24' y1='7.76' x2='19.07' y2='4.93'%3E%3C/line%3E%3C/svg%3E");
+}
+
+.custom-upload:hover .upload-icon {
+    opacity: 1;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.upload-hint {
+    display: block;
+    color: #888;
+    font-size: 12px;
+    margin-top: 8px;
+}
